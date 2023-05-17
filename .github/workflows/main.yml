@@ -1,10 +1,10 @@
-name: Flymovies Actions
-run-name: ${{ github.actor }} building Flymovies 🚀
+name: speezer_app
+run-name: ${{ github.actor }} 🚀 building Speezer App 🚀
 on: 
   push:
 
 jobs:
-  build-and-release-windows:
+  build-and-release-windows: 
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,12 +24,12 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          filename: flymovies-windows.zip
+          filename: speezer_app-windows.zip
           directory: build/windows/runner/Release
       - name: Windows Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: build/windows/runner/Release/flymovies-windows.zip
+          artifacts: build/windows/runner/Release/speezer_app-windows.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v1.0.${{ github.run_number }}w
 
@@ -55,11 +55,11 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          filename: flymovies-linux.zip
+          filename: speezer_app-linux.zip
           directory: build/linux/x64/release/bundle
       - name: Linux Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/linux/x64/release/bundle/flymovies-linux.zip"
+          artifacts: "build/linux/x64/release/bundle/speezer_app-linux.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v1.0.${{ github.run_number }}l
