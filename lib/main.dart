@@ -1,98 +1,127 @@
 import 'package:flutter/material.dart';
+import 'package:speezer_app/src/widgets/BottomNavigationBar.dart';
+import 'package:speezer_app/src/widgets/SideBar.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const SpeezerApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class SpeezerApp extends StatelessWidget {
+  const SpeezerApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Speezer App',
       theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-          primaryColor: Colors.deepPurple,
-          scaffoldBackgroundColor: Colors.black,
-          textTheme: const TextTheme(
-            labelMedium: TextStyle(color: Colors.white),
-            bodyMedium: TextStyle(color: Colors.white),
-            titleMedium: TextStyle(color: Colors.deepPurple),
-            titleLarge: TextStyle(
-                color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
-          )),
-      home: const MyHomePage(title: 'Speezer'),
+        primaryColor: Colors.black,
+        primarySwatch: Colors.deepPurple,
+        highlightColor: Colors.white,
+        scaffoldBackgroundColor: Colors.black,
+        fontFamily: 'Arial',
+      ),
+      home: const SpeezerHome(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class SpeezerHome extends StatelessWidget {
+  const SpeezerHome({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text(widget.title, style: Theme.of(context).textTheme.titleLarge),
+        backgroundColor: Colors.deepPurple,
         centerTitle: false,
-        leadingWidth: 10,
-      ),
-      body: Center(
-        child:  Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              width: 200,
-              height: 500,
-              child: NavigationRail(
-                backgroundColor: Theme.of(context).primaryColor,
-                selectedIndex: 0,
-                destinations: const [
-                  NavigationRailDestination(
-                      icon: Icon(
-                        Icons.favorite,
-                        size: 25,
-                        color: Colors.black,
-                      ),
-                      label: Text("Favoriter")),
-                  NavigationRailDestination(
-                      icon: Icon(
-                        Icons.favorite,
-                        size: 25,
-                        color: Colors.black,
-                      ),
-                      label: Text("Favoriter"))
-                ],
-              ),
-            ),
-            Text(
-              'You have pushed the button this many times:',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
+        title: const Text(
+          'Speezer',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
+      body: Row(
+        children: [
+          const SideBar(),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Text(
+                    'Playing now',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 200.0,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        width: 150.0,
+                        margin: const EdgeInsets.all(8.0),
+                        color: Colors.grey,
+                        child: Center(
+                          child: Text(
+                            'Música $index',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Text(
+                    'Playlists',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    padding: const EdgeInsets.all(16.0),
+                    children: List.generate(6, (index) {
+                      return Container(
+                        margin: const EdgeInsets.all(8.0),
+                        color: Colors.grey,
+                        child: Center(
+                          child: Text(
+                            'Playlist $index',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: const BottomNavBar()
     );
   }
 }
+
