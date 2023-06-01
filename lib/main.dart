@@ -12,9 +12,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Speezer App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
+        primaryColor: Colors.deepPurple,
+        scaffoldBackgroundColor: Colors.black,
+        textTheme: const TextTheme(
+          labelMedium: TextStyle(color: Colors.white),
+          bodyMedium: TextStyle(color: Colors.white),
+          titleMedium: TextStyle(color: Colors.deepPurple),
+          titleLarge: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
+        )
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Speezer'),
     );
   }
 }
@@ -41,27 +49,25 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        toolbarOpacity: 0.7,
+        title: Text(widget.title, style: Theme.of(context).textTheme.titleLarge,),
+        centerTitle: false,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
+            Text(
               'You have pushed the button this many times:',
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
