@@ -12,16 +12,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Speezer App',
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        primaryColor: Colors.deepPurple,
-        scaffoldBackgroundColor: Colors.black,
-        textTheme: const TextTheme(
-          labelMedium: TextStyle(color: Colors.white),
-          bodyMedium: TextStyle(color: Colors.white),
-          titleMedium: TextStyle(color: Colors.deepPurple),
-          titleLarge: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
-        )
-      ),
+          primarySwatch: Colors.deepPurple,
+          primaryColor: Colors.deepPurple,
+          scaffoldBackgroundColor: Colors.black,
+          textTheme: const TextTheme(
+            labelMedium: TextStyle(color: Colors.white),
+            bodyMedium: TextStyle(color: Colors.white),
+            titleMedium: TextStyle(color: Colors.deepPurple),
+            titleLarge: TextStyle(
+                color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
+          )),
       home: const MyHomePage(title: 'Speezer'),
     );
   }
@@ -49,14 +49,39 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarOpacity: 0.7,
-        title: Text(widget.title, style: Theme.of(context).textTheme.titleLarge,),
+        title:
+            Text(widget.title, style: Theme.of(context).textTheme.titleLarge),
         centerTitle: false,
+        leadingWidth: 10,
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child:  Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(
+              width: 200,
+              height: 500,
+              child: NavigationRail(
+                backgroundColor: Theme.of(context).primaryColor,
+                selectedIndex: 0,
+                destinations: const [
+                  NavigationRailDestination(
+                      icon: Icon(
+                        Icons.favorite,
+                        size: 25,
+                        color: Colors.black,
+                      ),
+                      label: Text("Favoriter")),
+                  NavigationRailDestination(
+                      icon: Icon(
+                        Icons.favorite,
+                        size: 25,
+                        color: Colors.black,
+                      ),
+                      label: Text("Favoriter"))
+                ],
+              ),
+            ),
             Text(
               'You have pushed the button this many times:',
               style: Theme.of(context).textTheme.bodyMedium,
