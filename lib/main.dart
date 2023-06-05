@@ -72,7 +72,7 @@ class SpeezerHome extends StatelessWidget {
                         color: Colors.grey,
                         child: Center(
                           child: Text(
-                            'Música $index',
+                            'Music $index',
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16.0,
