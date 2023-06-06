@@ -10,12 +10,14 @@ class _PlaybackBarState extends State<PlaybackBar> {
 
   @override
   Widget build(BuildContext context) {
-    double horizontalPadding = MediaQuery.of(context).size.width.toDouble() * 0.25;
+    double horizontalPadding =
+        MediaQuery.of(context).size.width.toDouble() * 0.25;
 
     return Container(
-      height: 60,
+      height: 75,
       color: Colors.black,
-      padding: EdgeInsets.fromLTRB(horizontalPadding, 10, horizontalPadding, 10),
+      padding:
+          EdgeInsets.fromLTRB(horizontalPadding, 10, horizontalPadding, 10),
       child: Row(
         children: [
           IconButton(
@@ -29,24 +31,24 @@ class _PlaybackBarState extends State<PlaybackBar> {
               });
             },
           ),
-          SizedBox(width: 16.0),
           Expanded(
-            child: Slider(
-              onChanged: (double value) {
-              },
-              value: 0.5,
-              activeColor: Colors.green,
-              inactiveColor: Colors.grey,
-            ),
-          ),
-          SizedBox(width: 16.0),
+              child: SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    trackHeight: 1,
+                    thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8.0),
+                  ),
+                  child: Slider(
+                    onChanged: (double value) {},
+                    value: 0.5,
+                    activeColor: Colors.white,
+                    inactiveColor: Colors.grey,
+                  ))),
           IconButton(
             icon: Icon(
               Icons.skip_next,
               color: Colors.white,
             ),
-            onPressed: () {
-            },
+            onPressed: () {},
           ),
         ],
       ),
