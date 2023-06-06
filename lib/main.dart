@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:speezer_app/src/widgets/BottomNavigationBar.dart';
+import 'package:speezer_app/src/widgets/PlaybackBar.dart';
 import 'package:speezer_app/src/widgets/SideBar.dart';
 
 void main() => runApp(const SpeezerApp());
@@ -124,6 +124,6 @@ class SpeezerHome extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: const BottomNavBar());
+        bottomNavigationBar: PlaybackBar());
   }
 }
