@@ -35,7 +35,8 @@ class _PlaybackBarState extends State<PlaybackBar> {
               child: SliderTheme(
                   data: SliderTheme.of(context).copyWith(
                     trackHeight: 1,
-                    thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8.0),
+                    thumbShape:
+                        const RoundSliderThumbShape(enabledThumbRadius: 8.0),
                   ),
                   child: Slider(
                     onChanged: (double value) {},
@@ -44,7 +45,7 @@ class _PlaybackBarState extends State<PlaybackBar> {
                     inactiveColor: Colors.grey,
                   ))),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.skip_next,
               color: Colors.white,
             ),

@@ -28,27 +28,27 @@ class SideBar extends StatelessWidget {
             ),
             ListTile(
               iconColor: Colors.white,
+              focusColor: Colors.grey,
               textColor: Colors.white,
               leading: const Icon(Icons.home),
               title: const Text('Home'),
-              onTap: () {
-              },
+              onTap: () {},
             ),
             ListTile(
               iconColor: Colors.white,
+              focusColor: Colors.grey,
               textColor: Colors.white,
-              leading: Icon(Icons.search),
+              leading: const Icon(Icons.search),
               title: const Text('Search'),
-              onTap: () {
-              },
+              onTap: () {},
             ),
             ListTile(
               iconColor: Colors.white,
+              focusColor: Colors.grey,
               textColor: Colors.white,
-              leading: Icon(Icons.library_music),
-              title: Text('Library'),
-              onTap: () {
-              },
+              leading: const Icon(Icons.library_music),
+              title: const Text('Library'),
+              onTap: () {},
             ),
           ],
         ),
