@@ -10,6 +10,11 @@ class _PlaybackBarState extends State<PlaybackBar> {
 
   @override
   Widget build(BuildContext context) {
+    int _currentPlayTimeInSeconds = 20;
+    int totalTimeInSeconds = 100;
+
+    double playerRange = ((_currentPlayTimeInSeconds * 100) / totalTimeInSeconds) / 100;
+
     double horizontalPadding =
         MediaQuery.of(context).size.width.toDouble() * 0.25;
 
@@ -40,7 +45,7 @@ class _PlaybackBarState extends State<PlaybackBar> {
                   ),
                   child: Slider(
                     onChanged: (double value) {},
-                    value: 0.5,
+                    value: playerRange,
                     activeColor: Colors.white,
                     inactiveColor: Colors.grey,
                   ))),
