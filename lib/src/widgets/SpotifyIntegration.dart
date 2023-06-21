@@ -10,7 +10,7 @@ class SpotifyIntegration extends StatefulWidget {
 
 class _SpotifyIntegrationState extends State<SpotifyIntegration> {
   final String clientId = '6880b271a3a14f028b8dc5c25c9c210f';
-  final String redirectUri = 'http://localhost:60677/';
+  final String redirectUri = 'http://localhost:8000/';
   final String scope = 'user-read-email';
 
   String _accessToken = '';
