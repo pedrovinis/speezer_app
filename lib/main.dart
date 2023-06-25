@@ -10,11 +10,24 @@ import 'package:spotify/spotify.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:url_launcher/url_launcher.dart';
+import 'package:protocol_handler/protocol_handler.dart';
+import 'package:window_manager/window_manager.dart';
 
 const kWindowsScheme = 'sample';
 
 Future<void> main() async {
-  _registerWindowsProtocol();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (!kIsWeb && (Platform.isLinux || Platform.isMacOS || Platform.isWindows)) {
+    await windowManager.ensureInitialized();
+    windowManager.waitUntilReadyToShow().then((_) async {
+      await windowManager.setSize(const Size(600, 400));
+      await windowManager.center();
+      await windowManager.show();
+    });
+
+    await protocolHandler.register('speezer');
+  }
   await dotenv.load(fileName: '.env');
   runApp(const SpeezerApp());
 }

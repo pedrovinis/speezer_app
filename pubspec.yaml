@@ -39,6 +39,8 @@ dependencies:
   flutter_dotenv: ^5.1.0
   url_launcher: ^6.1.11
   app_links: ^3.4.3
+  protocol_handler: ^0.1.5
+  window_manager: ^0.3.4
 
 dev_dependencies:
   flutter_test:
