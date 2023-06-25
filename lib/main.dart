@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:speezer_app/src/widgets/PlaybackBar.dart';
 import 'package:speezer_app/src/widgets/SideBar.dart';
+import 'package:spotify/spotify.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() => runApp(const SpeezerApp());
+Future<void> main() async {
+  await dotenv.load(fileName: '.env');
+  runApp(const SpeezerApp());
+}
 
 class SpeezerApp extends StatelessWidget {
   const SpeezerApp({super.key});
@@ -29,6 +34,12 @@ class SpeezerHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final clientId = dotenv.env['CLIENT_ID'].toString();
+    final clientSecret = dotenv.env['CLIENT_SECRET'].toString();
+
+    final credentials = SpotifyApiCredentials(clientId, clientSecret);
+    final spotify = SpotifyApi(credentials);
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.deepPurple,
