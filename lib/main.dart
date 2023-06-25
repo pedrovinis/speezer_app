@@ -3,6 +3,7 @@ import 'package:speezer_app/src/widgets/PlaybackBar.dart';
 import 'package:speezer_app/src/widgets/SideBar.dart';
 import 'package:spotify/spotify.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'dart:html' as html;
 
 Future<void> main() async {
   await dotenv.load(fileName: '.env');
@@ -34,10 +35,10 @@ class SpeezerHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final clientId = dotenv.env['CLIENT_ID'].toString();
-    final clientSecret = dotenv.env['CLIENT_SECRET'].toString();
-
+    final clientId = dotenv.env['SPOTIFY_CLIENT_ID'].toString();
+    final clientSecret = dotenv.env['SPOTIFY_CLIENT_SECRET'].toString();
     final credentials = SpotifyApiCredentials(clientId, clientSecret);
+
     final spotify = SpotifyApi(credentials);
 
     return Scaffold(
@@ -56,6 +57,7 @@ class SpeezerHome extends StatelessWidget {
         body: Row(
           children: [
             const SideBar(),
+            ElevatedButton(onPressed: () => spotifyAuth(credentials), child: null),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,4 +139,18 @@ class SpeezerHome extends StatelessWidget {
         ),
         bottomNavigationBar: PlaybackBar());
   }
+}
+
+Future<void> spotifyAuth(SpotifyApiCredentials credentials) async {
+  final redirectUri = dotenv.env['SPOTIFY_REDIRECT_URL'].toString();
+  final grant = SpotifyApi.authorizationCodeGrant(credentials);
+
+  final scopes = ['user-read-email', 'user-library-read'];
+
+  final authUri = grant.getAuthorizationUrl(
+    Uri.parse(redirectUri),
+    scopes: scopes,
+  );
+
+  html.window.open(authUri.toString(), 'Auth', 'width: 500, height: 500').addEventListener("", (event) => null);
 }
