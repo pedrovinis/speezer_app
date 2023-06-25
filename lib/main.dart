@@ -1,3 +1,8 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:app_links/app_links.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:speezer_app/src/widgets/PlaybackBar.dart';
 import 'package:speezer_app/src/widgets/SideBar.dart';
@@ -6,13 +11,54 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
+const kWindowsScheme = 'sample';
+
 Future<void> main() async {
+  _registerWindowsProtocol();
   await dotenv.load(fileName: '.env');
   runApp(const SpeezerApp());
 }
 
-class SpeezerApp extends StatelessWidget {
+class SpeezerApp extends StatefulWidget {
   const SpeezerApp({super.key});
+
+  @override
+  SpeezerAppState createState() => SpeezerAppState();
+}
+
+class SpeezerAppState extends State<SpeezerApp> {
+  final _navigatorKey = GlobalKey<NavigatorState>();
+
+  late AppLinks _appLinks;
+  StreamSubscription<Uri>? _linkSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+
+    initDeepLinks();
+  }
+
+  Future<void> initDeepLinks() async {
+    _appLinks = AppLinks();
+
+    // Check initial link if app was in cold state (terminated)
+    final appLink = await _appLinks.getInitialAppLink();
+    if (appLink != null) {
+      print('getInitialAppLink: $appLink');
+      openAppLink(appLink);
+    }
+
+    // Handle link when app is in warm state (front or background)
+    _linkSubscription = _appLinks.uriLinkStream.listen((uri) {
+      print('onAppLink: $uri');
+      openAppLink(uri);
+    });
+  }
+
+  void openAppLink(Uri uri) {
+    _navigatorKey.currentState?.pushNamed(uri.fragment);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +72,35 @@ class SpeezerApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
         fontFamily: 'Arial',
       ),
-      home: const SpeezerHome(),
+      home: HomeScreen(),
+      initialRoute: "/",
+      onGenerateRoute: (RouteSettings settings) {
+        Widget routeWidget = HomeScreen();
+
+        // Mimic web routing
+        final routeName = settings.name;
+        if (routeName != null) {
+          if (routeName.startsWith('/book/')) {
+            // Navigated to /book/:id
+            routeWidget = AuthScreen(
+              routeName.substring(routeName.indexOf('/book/')),
+            );
+          } else if (routeName == '/book') {
+            // Navigated to /book without other parameters
+            routeWidget = AuthScreen("None");
+          }
+        }
+
+        return MaterialPageRoute(
+          builder: (context) => routeWidget,
+          settings: settings,
+          fullscreenDialog: true,
+        );
+      },
     );
   }
-}
 
-class SpeezerHome extends StatelessWidget {
-  const SpeezerHome({super.key});
-
-  @override
-  Widget build(BuildContext context) {
+  Widget HomeScreen() {
     final clientId = dotenv.env['SPOTIFY_CLIENT_ID'].toString();
     final clientSecret = dotenv.env['SPOTIFY_CLIENT_SECRET'].toString();
     final credentials = SpotifyApiCredentials(clientId, clientSecret);
@@ -141,6 +206,12 @@ class SpeezerHome extends StatelessWidget {
         ),
         bottomNavigationBar: PlaybackBar());
   }
+
+  Widget AuthScreen(String authToken) {
+    return const Column(
+      children: [Text("authToken")],
+    );
+  }
 }
 
 Future<void> spotifyAuth(SpotifyApiCredentials credentials) async {
@@ -158,4 +229,13 @@ Future<void> spotifyAuth(SpotifyApiCredentials credentials) async {
     Uri.parse(authUri.toString()),
     webOnlyWindowName: '_self',
   );
+}
+
+void _registerWindowsProtocol() {
+  // Register our protocol only on Windows platform
+  if (!kIsWeb) {
+    if (Platform.isWindows) {
+      // registerProtocolHandler(kWindowsScheme);
+    }
+  }
 }
