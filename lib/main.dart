@@ -39,7 +39,7 @@ class SpeezerApp extends StatefulWidget {
   SpeezerAppState createState() => SpeezerAppState();
 }
 
-class SpeezerAppState extends State<SpeezerApp> {
+class SpeezerAppState extends State<SpeezerApp> with ProtocolListener {
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   late AppLinks _appLinks;
@@ -49,7 +49,20 @@ class SpeezerAppState extends State<SpeezerApp> {
   void initState() {
     super.initState();
 
+    protocolHandler.addListener(this);
     initDeepLinks();
+  }
+
+  @override
+  void dispose() {
+    protocolHandler.removeListener(this);
+    super.dispose();
+  }
+
+  @override
+  void onProtocolUrlReceived(String url) {
+    String log = 'Url received: $url)';
+    print(log);
   }
 
   Future<void> initDeepLinks() async {
