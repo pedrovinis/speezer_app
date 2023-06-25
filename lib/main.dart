@@ -1,18 +1,8 @@
-import 'dart:html';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:speezer_app/src/widgets/PlaybackBar.dart';
 import 'package:speezer_app/src/widgets/SideBar.dart';
-import 'package:speezer_app/src/widgets/SpotifyIntegration.dart';
 
-void main() {
-  if (kIsWeb) {
-    handleSpotifyAuthRedirect();
-  }
-
-  runApp(const SpeezerApp());
-}
+void main() => runApp(const SpeezerApp());
 
 class SpeezerApp extends StatelessWidget {
   const SpeezerApp({super.key});
@@ -55,8 +45,6 @@ class SpeezerHome extends StatelessWidget {
         body: Row(
           children: [
             const SideBar(),
-            SpotifyIntegration(),
-
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,20 +125,5 @@ class SpeezerHome extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: PlaybackBar());
-  }
-}
-
-Future<void> handleSpotifyAuthRedirect() async {
-  final Uri initialUri = Uri.parse(window.location.href);
-  final Uri redirectUri = Uri.parse('YOUR_REDIRECT_URI');
-
-  if (initialUri.fragment.isNotEmpty && initialUri != redirectUri) {
-    // Redirected from Spotify authentication
-    // Extract access token from the URL fragment
-    final queryParams = Uri.splitQueryString(initialUri.fragment);
-    final accessToken = queryParams['access_token'];
-
-    // Perform further processing with the access token
-    // For example, store it in local storage or pass it to your authentication handler
   }
 }
