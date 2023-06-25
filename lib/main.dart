@@ -3,7 +3,8 @@ import 'package:speezer_app/src/widgets/PlaybackBar.dart';
 import 'package:speezer_app/src/widgets/SideBar.dart';
 import 'package:spotify/spotify.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'dart:html' as html;
+
+import 'package:url_launcher/url_launcher.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: '.env');
@@ -57,7 +58,8 @@ class SpeezerHome extends StatelessWidget {
         body: Row(
           children: [
             const SideBar(),
-            ElevatedButton(onPressed: () => spotifyAuth(credentials), child: null),
+            ElevatedButton(
+                onPressed: () => spotifyAuth(credentials), child: null),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,5 +154,8 @@ Future<void> spotifyAuth(SpotifyApiCredentials credentials) async {
     scopes: scopes,
   );
 
-  html.window.open(authUri.toString(), 'Auth', 'width: 500, height: 500').addEventListener("", (event) => null);
+  await launchUrl(
+    Uri.parse(authUri.toString()),
+    webOnlyWindowName: '_self',
+  );
 }
