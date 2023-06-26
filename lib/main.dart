@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:bot_toast/bot_toast.dart';
 import 'package:app_links/app_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -100,6 +101,8 @@ class SpeezerAppState extends State<SpeezerApp> with ProtocolListener {
       ),
       home: HomeScreen(),
       initialRoute: "/",
+      builder: BotToastInit(),
+      navigatorObservers: [BotToastNavigatorObserver()],
       onGenerateRoute: (RouteSettings settings) {
         Widget routeWidget = HomeScreen();
 
