@@ -106,14 +106,11 @@ class SpeezerAppState extends State<SpeezerApp> with ProtocolListener {
         // Mimic web routing
         final routeName = settings.name;
         if (routeName != null) {
-          if (routeName.startsWith('/book/')) {
+          if (routeName.startsWith('/auth/')) {
             // Navigated to /book/:id
             routeWidget = AuthScreen(
-              routeName.substring(routeName.indexOf('/book/')),
+              routeName.substring(routeName.indexOf('/auth/')),
             );
-          } else if (routeName == '/book') {
-            // Navigated to /book without other parameters
-            routeWidget = AuthScreen("None");
           }
         }
 
