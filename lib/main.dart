@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:bot_toast/bot_toast.dart';
 import 'package:app_links/app_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,28 +10,13 @@ import 'package:spotify/spotify.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:url_protocol/url_protocol.dart';
-
-
 import 'package:url_launcher/url_launcher.dart';
-import 'package:protocol_handler/protocol_handler.dart';
-import 'package:window_manager/window_manager.dart';
 
 const kWindowsScheme = 'speezer';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   _registerWindowsProtocol();
 
-  if (!kIsWeb && (Platform.isLinux || Platform.isMacOS || Platform.isWindows)) {
-    await windowManager.ensureInitialized();
-    windowManager.waitUntilReadyToShow().then((_) async {
-      await windowManager.setSize(const Size(600, 400));
-      await windowManager.center();
-      await windowManager.show();
-    });
-
-    await protocolHandler.register('speezer');
-  }
   await dotenv.load(fileName: '.env');
   runApp(const SpeezerApp());
 }
@@ -44,7 +28,7 @@ class SpeezerApp extends StatefulWidget {
   SpeezerAppState createState() => SpeezerAppState();
 }
 
-class SpeezerAppState extends State<SpeezerApp> with ProtocolListener {
+class SpeezerAppState extends State<SpeezerApp> {
   final _navigatorKey = GlobalKey<NavigatorState>();
 
   late AppLinks _appLinks;
@@ -54,20 +38,7 @@ class SpeezerAppState extends State<SpeezerApp> with ProtocolListener {
   void initState() {
     super.initState();
 
-    protocolHandler.addListener(this);
     initDeepLinks();
-  }
-
-  @override
-  void dispose() {
-    protocolHandler.removeListener(this);
-    super.dispose();
-  }
-
-  @override
-  void onProtocolUrlReceived(String url) {
-    String log = 'Url received: $url)';
-    print(log);
   }
 
   Future<void> initDeepLinks() async {
@@ -106,16 +77,12 @@ class SpeezerAppState extends State<SpeezerApp> with ProtocolListener {
       home: HomeScreen(),
       initialRoute: "/",
       navigatorKey: _navigatorKey,
-      builder: BotToastInit(),
-      navigatorObservers: [BotToastNavigatorObserver()],
       onGenerateRoute: (RouteSettings settings) {
         Widget routeWidget = HomeScreen();
 
-        // Mimic web routing
         final routeName = settings.name;
         if (routeName != null) {
           if (routeName.startsWith('/auth/')) {
-            // Navigated to /book/:id
             routeWidget = AuthScreen(
               routeName.substring(routeName.indexOf('/auth/')),
             );
