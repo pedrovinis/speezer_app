@@ -42,6 +42,7 @@ dependencies:
   protocol_handler: ^0.1.5
   window_manager: ^0.3.4
   bot_toast: ^4.0.4
+  url_protocol: ^1.0.0
 
 dev_dependencies:
   flutter_test:

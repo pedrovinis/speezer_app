@@ -10,14 +10,18 @@ import 'package:speezer_app/src/widgets/SideBar.dart';
 import 'package:spotify/spotify.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'package:url_protocol/url_protocol.dart';
+
+
 import 'package:url_launcher/url_launcher.dart';
 import 'package:protocol_handler/protocol_handler.dart';
 import 'package:window_manager/window_manager.dart';
 
-const kWindowsScheme = 'sample';
+const kWindowsScheme = 'speezer';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  _registerWindowsProtocol();
 
   if (!kIsWeb && (Platform.isLinux || Platform.isMacOS || Platform.isWindows)) {
     await windowManager.ensureInitialized();
@@ -261,7 +265,7 @@ void _registerWindowsProtocol() {
   // Register our protocol only on Windows platform
   if (!kIsWeb) {
     if (Platform.isWindows) {
-      // registerProtocolHandler(kWindowsScheme);
+      registerProtocolHandler(kWindowsScheme);
     }
   }
 }
