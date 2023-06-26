@@ -105,6 +105,7 @@ class SpeezerAppState extends State<SpeezerApp> with ProtocolListener {
       ),
       home: HomeScreen(),
       initialRoute: "/",
+      navigatorKey: _navigatorKey,
       builder: BotToastInit(),
       navigatorObservers: [BotToastNavigatorObserver()],
       onGenerateRoute: (RouteSettings settings) {
