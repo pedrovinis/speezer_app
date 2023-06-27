@@ -18,7 +18,7 @@ Future<void> main() async {
   _registerWindowsProtocol();
 
   await dotenv.load(fileName: '.env');
-  runApp(const SpeezerApp());
+  runApp(const SpeezerAppx());
 }
 
 class SpeezerApp extends StatefulWidget {
