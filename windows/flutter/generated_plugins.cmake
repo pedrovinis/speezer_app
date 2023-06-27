@@ -3,6 +3,11 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+<<<<<<< HEAD
+=======
+  app_links
+  url_launcher_windows
+>>>>>>> d510afa64a00d1e0e97995823930a02074bec1b5
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
