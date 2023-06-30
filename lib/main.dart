@@ -1,11 +1,13 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:speezer_app/src/widgets/PlaybackBar.dart';
-import 'package:speezer_app/src/widgets/SideBar.dart';
+import 'package:speezer_app/widgets/PlaybackBar.dart';
+import 'package:speezer_app/widgets/SideBar.dart';
+import 'utils/player.dart';
 
 void main() => runApp(const SpeezerApp());
 
 class SpeezerApp extends StatelessWidget {
-  const SpeezerApp({super.key});
+  const SpeezerApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,50 +26,120 @@ class SpeezerApp extends StatelessWidget {
   }
 }
 
-class SpeezerHome extends StatelessWidget {
-  const SpeezerHome({super.key});
+class SpeezerHome extends StatefulWidget {
+  const SpeezerHome({Key? key}) : super(key: key);
+
+  @override
+  _SpeezerHomeState createState() => _SpeezerHomeState();
+}
+
+class _SpeezerHomeState extends State<SpeezerHome> {
+  AudioManager audioManager = AudioManager();
+  bool isPlaying = false;
+  Duration currentPosition = Duration.zero;
+  Duration totalDuration = Duration(seconds: 161);
+
+  @override
+  void initState() {
+    super.initState();
+    AudioPlayer audioPlayer = audioManager.audioPlayer;
+
+    audioPlayer.onPlayerStateChanged.listen((playerState) {
+      setState(() {
+        isPlaying = playerState == PlayerState.PLAYING;
+      });
+    });
+
+    audioPlayer.onDurationChanged.listen((Duration duration) {
+      print("set total duration $duration");
+      setState(() {
+        totalDuration = duration;
+      });
+    });
+
+    audioPlayer.onAudioPositionChanged.listen((Duration duration) {
+      setState(() {
+        currentPosition = duration;
+      });
+    });
+
+    audioPlayer.onPlayerCompletion.listen((event) {
+      setState(() {
+        isPlaying = false;
+        currentPosition = const Duration();
+      });
+    });
+  }
+
+  void setCurrentPosition(Duration duration) {
+    setState(() {
+      currentPosition = duration;
+    });
+  }
+
+  @override
+  void dispose() {
+    audioManager.disposeAudioPlayer();
+    super.dispose();
+  }
+
+  void playAudio(String source) {
+    audioManager.playAudio(source);
+  }
+
+  void pauseAudio() {
+    audioManager.pauseAudio();
+  }
+
+  void stopAudio() {
+    audioManager.stopAudio();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.deepPurple,
-          centerTitle: false,
-          title: const Text(
-            'Speezer',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-            ),
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+        centerTitle: false,
+        title: const Text(
+          'Speezer',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        body: Row(
-          children: [
-            const SideBar(),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                    child: Text(
-                      'Playing now',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+      ),
+      body: Row(
+        children: [
+          const SideBar(),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Text(
+                    'Playing now',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
-                    height: 200.0,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 10,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
+                ),
+                SizedBox(
+                  height: 200.0,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          // playAudio('assets/audio/music$index.mp3');
+                        },
+                        child: Container(
                           width: 150.0,
                           margin: const EdgeInsets.all(8.0),
                           color: Colors.grey,
@@ -80,50 +152,60 @@ class SpeezerHome extends StatelessWidget {
                               ),
                             ),
                           ),
-                        );
-                      },
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Text(
+                    'Playlists',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                    child: Text(
-                      'Playlists',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 200.0,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 10,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          width: 150.0,
-                          margin: const EdgeInsets.all(8.0),
-                          color: Colors.grey,
-                          child: Center(
-                            child: Text(
-                              'Playlist $index',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16.0,
-                              ),
+                ),
+                SizedBox(
+                  height: 200.0,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        width: 150.0,
+                        margin: const EdgeInsets.all(8.0),
+                        color: Colors.grey,
+                        child: Center(
+                          child: Text(
+                            'Playlist $index',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.0,
                             ),
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-        bottomNavigationBar: PlaybackBar());
+          ),
+        ],
+      ),
+      bottomNavigationBar: PlaybackBar(
+        isPlaying: isPlaying,
+        currentPosition: currentPosition,
+        totalDuration: totalDuration,
+        onPlay: playAudio,
+        onPause: pauseAudio,
+        onStop: stopAudio,
+        setCurrentPosition: setCurrentPosition,
+      ),
+    );
   }
 }
