@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:speezer_app/widgets/AudiosRow.dart';
 import 'package:speezer_app/widgets/PlaybackBar.dart';
 import 'package:speezer_app/widgets/SideBar.dart';
 import 'utils/player.dart';
@@ -64,7 +65,6 @@ class _SpeezerHomeState extends State<SpeezerHome> {
   }
 
   Future<void> setCurrentPosition(Duration duration) async {
-    // print("seek $duration");
     await audioManager.audioPlayer.seek(duration);
   }
 
@@ -101,14 +101,14 @@ class _SpeezerHomeState extends State<SpeezerHome> {
           ),
         ),
       ),
-      body: Row(
+      body: const Row(
         children: [
-          const SideBar(),
+          SideBar(),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
+                Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                   child: Text(
@@ -120,69 +120,8 @@ class _SpeezerHomeState extends State<SpeezerHome> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 200.0,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          // playAudio('assets/audio/music$index.mp3');
-                        },
-                        child: Container(
-                          width: 150.0,
-                          margin: const EdgeInsets.all(8.0),
-                          color: Colors.grey,
-                          child: Center(
-                            child: Text(
-                              'Music $index',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                const Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                  child: Text(
-                    'Playlists',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 200.0,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        width: 150.0,
-                        margin: const EdgeInsets.all(8.0),
-                        color: Colors.grey,
-                        child: Center(
-                          child: Text(
-                            'Playlist $index',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                AudiosRow(),
+                AudiosRow(),
               ],
             ),
           ),
