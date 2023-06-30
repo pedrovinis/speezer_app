@@ -14,7 +14,7 @@ class PlaybackBar extends StatefulWidget {
 }
 
 class _PlaybackBarState extends State<PlaybackBar> {
-  Duration currentPosition = Duration.zero;
+  Duration currentDuration = Duration.zero;
   Duration totalDuration = Duration.zero;
 
   @override
@@ -32,7 +32,7 @@ class _PlaybackBarState extends State<PlaybackBar> {
 
     audioPlayer.onPositionChanged.listen((Duration duration) {
       setState(() {
-        currentPosition = duration;
+        currentDuration = duration;
       });
     });
   }
@@ -58,13 +58,10 @@ class _PlaybackBarState extends State<PlaybackBar> {
     PlayerState playerState = widget.playerState;
     PlaybackBarManager playbackmanager = PlaybackBarManager();
 
-    int currentDurationInSeconds = currentPosition.inSeconds;
     int totalTimeInSeconds = totalDuration.inSeconds;
 
     double playerRange =
-        currentDurationInSeconds == 0 && totalTimeInSeconds == 0
-            ? 0
-            : ((currentDurationInSeconds * 100) / totalTimeInSeconds) / 100;
+        playbackmanager.getPlayerRange(currentDuration, totalDuration);
 
     double horizontalPadding =
         MediaQuery.of(context).size.width.toDouble() * 0.25;
@@ -72,7 +69,7 @@ class _PlaybackBarState extends State<PlaybackBar> {
     bool isPlaying = playerState == PlayerState.playing;
 
     String currentDurationISOStr =
-        playbackmanager.getFormatedTime(currentPosition);
+        playbackmanager.getFormatedTime(currentDuration);
 
     String totalDurationISOStr = playbackmanager.getFormatedTime(totalDuration);
 

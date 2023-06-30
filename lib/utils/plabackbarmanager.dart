@@ -8,4 +8,13 @@ class PlaybackBarManager {
     String secondsStr = remainingSeconds.toString().padLeft(2, '0');
     return '$minutesStr:$secondsStr';
   }
+
+  double getPlayerRange(Duration currentDuration, Duration totalDuration) {
+    int currentDurationInSeconds = currentDuration.inSeconds;
+    int totalTimeInSeconds = totalDuration.inSeconds;
+
+    if (totalTimeInSeconds == 0) return 0;
+
+    return currentDurationInSeconds * 100 / totalTimeInSeconds / 100;
+  }
 }
