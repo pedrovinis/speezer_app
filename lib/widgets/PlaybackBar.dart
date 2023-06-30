@@ -2,7 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 class PlaybackBar extends StatelessWidget {
-  final bool isPlaying;
+  final PlayerState playerState;
   final Duration currentPosition;
   final Duration totalDuration;
   final Function(String source) onPlay;
@@ -12,7 +12,7 @@ class PlaybackBar extends StatelessWidget {
 
   const PlaybackBar(
       {super.key,
-      required this.isPlaying,
+      required this.playerState,
       required this.currentPosition,
       required this.totalDuration,
       required this.onPlay,
@@ -32,6 +32,8 @@ class PlaybackBar extends StatelessWidget {
 
     double horizontalPadding =
         MediaQuery.of(context).size.width.toDouble() * 0.25;
+
+    bool isPlaying = playerState == PlayerState.playing;
     return Container(
       height: 75,
       color: Colors.black,
@@ -61,8 +63,8 @@ class PlaybackBar extends StatelessWidget {
                   ),
                   child: Slider(
                     onChanged: (double value) {
-                      setCurrentPosition(Duration(
-                          seconds: value.round() * totalTimeInSeconds));
+                      int seconds = (value * totalTimeInSeconds).round();
+                      setCurrentPosition(Duration(seconds: seconds));
                     },
                     value: playerRange,
                     activeColor: Colors.white,

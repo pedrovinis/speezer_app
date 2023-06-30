@@ -35,46 +35,37 @@ class SpeezerHome extends StatefulWidget {
 
 class _SpeezerHomeState extends State<SpeezerHome> {
   AudioManager audioManager = AudioManager();
-  bool isPlaying = false;
+  PlayerState playerState = PlayerState.paused;
   Duration currentPosition = Duration.zero;
-  Duration totalDuration = Duration(seconds: 161);
+  Duration totalDuration = Duration.zero;
 
   @override
   void initState() {
     super.initState();
     AudioPlayer audioPlayer = audioManager.audioPlayer;
 
-    audioPlayer.onPlayerStateChanged.listen((playerState) {
+    audioPlayer.onPlayerStateChanged.listen((_playerState) {
       setState(() {
-        isPlaying = playerState == PlayerState.PLAYING;
+        playerState = _playerState;
       });
     });
 
     audioPlayer.onDurationChanged.listen((Duration duration) {
-      print("set total duration $duration");
       setState(() {
         totalDuration = duration;
       });
     });
 
-    audioPlayer.onAudioPositionChanged.listen((Duration duration) {
+    audioPlayer.onPositionChanged.listen((Duration duration) {
       setState(() {
         currentPosition = duration;
       });
     });
-
-    audioPlayer.onPlayerCompletion.listen((event) {
-      setState(() {
-        isPlaying = false;
-        currentPosition = const Duration();
-      });
-    });
   }
 
-  void setCurrentPosition(Duration duration) {
-    setState(() {
-      currentPosition = duration;
-    });
+  Future<void> setCurrentPosition(Duration duration) async {
+    // print("seek $duration");
+    await audioManager.audioPlayer.seek(duration);
   }
 
   @override
@@ -198,7 +189,7 @@ class _SpeezerHomeState extends State<SpeezerHome> {
         ],
       ),
       bottomNavigationBar: PlaybackBar(
-        isPlaying: isPlaying,
+        playerState: playerState,
         currentPosition: currentPosition,
         totalDuration: totalDuration,
         onPlay: playAudio,

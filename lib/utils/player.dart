@@ -12,28 +12,15 @@ class AudioManager {
 
   Future<void> playAudio(String source) async {
     // await stopAudio();
-    await audioPlayer.play(source, isLocal: true);
+    await audioPlayer.play(UrlSource(source));
   }
 
   Future<void> pauseAudio() async {
     await audioPlayer.pause();
-
-    isPlaying = false;
   }
 
   Future<void> stopAudio() async {
     await audioPlayer.stop();
-
-    isPlaying = false;
-    currentPosition = Duration();
-  }
-
-  void startPositionTracker() {
-    positionTimer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (isPlaying) {
-        currentPosition = timer.tick as Duration;
-      }
-    });
   }
 
   void disposeAudioPlayer() {
