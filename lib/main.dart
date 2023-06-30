@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:speezer_app/widgets/AudiosRow.dart';
 import 'package:speezer_app/widgets/PlaybackBar.dart';
 import 'package:speezer_app/widgets/SideBar.dart';
-import 'utils/player.dart';
+import 'utils/audiomanager.dart';
 
 void main() => runApp(const SpeezerApp());
 
@@ -37,8 +37,6 @@ class SpeezerHome extends StatefulWidget {
 class _SpeezerHomeState extends State<SpeezerHome> {
   AudioManager audioManager = AudioManager();
   PlayerState playerState = PlayerState.paused;
-  Duration currentPosition = Duration.zero;
-  Duration totalDuration = Duration.zero;
 
   @override
   void initState() {
@@ -50,22 +48,6 @@ class _SpeezerHomeState extends State<SpeezerHome> {
         playerState = _playerState;
       });
     });
-
-    audioPlayer.onDurationChanged.listen((Duration duration) {
-      setState(() {
-        totalDuration = duration;
-      });
-    });
-
-    audioPlayer.onPositionChanged.listen((Duration duration) {
-      setState(() {
-        currentPosition = duration;
-      });
-    });
-  }
-
-  Future<void> setCurrentPosition(Duration duration) async {
-    await audioManager.audioPlayer.seek(duration);
   }
 
   @override
@@ -128,13 +110,8 @@ class _SpeezerHomeState extends State<SpeezerHome> {
         ],
       ),
       bottomNavigationBar: PlaybackBar(
+        audioManager: audioManager,
         playerState: playerState,
-        currentPosition: currentPosition,
-        totalDuration: totalDuration,
-        onPlay: playAudio,
-        onPause: pauseAudio,
-        onStop: stopAudio,
-        setCurrentPosition: setCurrentPosition,
       ),
     );
   }

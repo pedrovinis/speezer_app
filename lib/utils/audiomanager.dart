@@ -1,17 +1,11 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/services.dart';
 
 class AudioManager {
   AudioPlayer audioPlayer = AudioPlayer();
-  bool isPlaying = false;
-  Duration totalDuration = const Duration();
-  Duration currentPosition = const Duration();
-  Timer? positionTimer;
 
   Future<void> playAudio(String source) async {
-    // await stopAudio();
     await audioPlayer.play(UrlSource(source));
   }
 
@@ -23,8 +17,11 @@ class AudioManager {
     await audioPlayer.stop();
   }
 
+  Future<void> setCurrentPosition(Duration duration) async {
+    await audioPlayer.seek(duration);
+  }
+
   void disposeAudioPlayer() {
     audioPlayer.dispose();
-    positionTimer?.cancel();
   }
 }
