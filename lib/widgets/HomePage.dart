@@ -1,7 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:speezer_app/widgets/AudiosRow.dart';
-import 'package:speezer_app/widgets/PlaybackBar.dart';
+import 'package:speezer_app/widgets/PlaybackBar/PlaybackBar.dart';
 import 'package:speezer_app/widgets/SideBar.dart';
 import '../utils/audiomanager.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
