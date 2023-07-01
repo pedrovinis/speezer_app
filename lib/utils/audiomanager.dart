@@ -6,7 +6,7 @@ class AudioManager {
   AudioPlayer audioPlayer = AudioPlayer();
 
   Future<void> playAudio(String source) async {
-    await audioPlayer.play(UrlSource(source));
+    await audioPlayer.play(UrlSource("assets/audio/$source"));
   }
 
   Future<void> pauseAudio() async {
