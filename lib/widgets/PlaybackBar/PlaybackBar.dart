@@ -77,74 +77,109 @@ class _PlaybackBarState extends State<PlaybackBar> {
 
     String totalDurationISOStr = playbackmanager.getFormatedTime(totalDuration);
 
+    double leftRightContainerWidth = 100;
+
     return Container(
         height: 108,
         color: Colors.black,
-        padding:
-            EdgeInsets.fromLTRB(horizontalPadding, 10, horizontalPadding, 10),
         child: Column(children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                music.name,
-                style: const TextStyle(color: Colors.white, fontSize: 12),
-              ),
-              IconButton(
-                splashRadius: 0.1,
-                icon: const Icon(
-                  Icons.skip_previous,
-                  color: Colors.white,
-                ),
-                onPressed: () {},
-              ),
-              IconButton(
-                splashRadius: 0.1,
-                icon: Icon(
-                  isPlaying ? Icons.pause : Icons.play_arrow,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  if (isPlaying) {
-                    pauseMusic();
-                  } else {
-                    resumeMusic();
-                  }
-                },
-              ),
-              IconButton(
-                splashRadius: 0.1,
-                icon: const Icon(
-                  Icons.skip_next,
-                  color: Colors.white,
-                ),
-                onPressed: () {},
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              PlayerTimer(timer: currentDurationISOStr),
-              Expanded(
-                  child: SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        trackHeight: 0.5,
-                        thumbShape: const RoundSliderThumbShape(
-                          enabledThumbRadius: 3,
-                          elevation: 0,
+          Container(
+            alignment: Alignment.centerRight,
+            padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                    width: leftRightContainerWidth,
+                    child: Column(
+                      children: [
+                        Text(
+                          music.name,
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
                         ),
+                        Text(
+                          music.artists[0].name,
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
+                        )
+                      ],
+                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      splashRadius: 0.1,
+                      icon: const Icon(
+                        Icons.skip_previous,
+                        color: Colors.white,
                       ),
-                      child: Slider(
-                        onChanged: (double value) {
-                          int seconds = (value * totalTimeInSeconds).round();
-                          setCurrentPosition(Duration(seconds: seconds));
-                        },
-                        value: playerRange,
-                        activeColor: Colors.white,
-                        inactiveColor: Colors.grey,
-                      ))),
-              PlayerTimer(timer: totalDurationISOStr)
-            ],
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      splashRadius: 0.1,
+                      icon: Icon(
+                        isPlaying ? Icons.pause : Icons.play_arrow,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        if (isPlaying) {
+                          pauseMusic();
+                        } else {
+                          resumeMusic();
+                        }
+                      },
+                    ),
+                    IconButton(
+                      splashRadius: 0.1,
+                      icon: const Icon(
+                        Icons.skip_next,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+                Container(
+                  width: leftRightContainerWidth,
+                  child: Text(""),
+                )
+              ],
+            ),
+          ),
+          Container(
+            padding:
+                EdgeInsets.fromLTRB(horizontalPadding, 0, horizontalPadding, 0),
+            child: Row(
+              children: [
+                PlayerTimer(timer: currentDurationISOStr),
+                Expanded(
+                    child: SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          trackHeight: 0.5,
+                          thumbShape: const RoundSliderThumbShape(
+                            enabledThumbRadius: 3,
+                            elevation: 0,
+                          ),
+                        ),
+                        child: Slider(
+                          onChanged: (double value) {
+                            int seconds = (value * totalTimeInSeconds).round();
+                            setCurrentPosition(Duration(seconds: seconds));
+                          },
+                          value: playerRange,
+                          activeColor: Colors.white,
+                          inactiveColor: Colors.grey,
+                        ))),
+                PlayerTimer(timer: totalDurationISOStr)
+              ],
+            ),
           )
         ]));
   }
