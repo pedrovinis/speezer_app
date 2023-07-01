@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:speezer_app/widgets/AudiosRow.dart';
 import 'package:speezer_app/widgets/PlaybackBar/PlaybackBar.dart';
 import 'package:speezer_app/widgets/SideBar.dart';
+import '../models/music.dart';
 import '../utils/audiomanager.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -14,7 +15,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  AudioManager audioManager = AudioManager();
+  late Music currentMusic;
+  late AudioManager audioManager =  AudioManager();
   PlayerState playerState = PlayerState.paused;
 
   @override
@@ -24,6 +26,7 @@ class _HomePageState extends State<HomePage> {
 
     audioPlayer.onPlayerStateChanged.listen((_playerState) {
       setState(() {
+        audioManager.setSelectedMusic(audioManager.music);
         playerState = _playerState;
       });
     });

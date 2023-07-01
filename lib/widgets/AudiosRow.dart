@@ -16,7 +16,7 @@ class AudiosRow extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: musics.length,
         itemBuilder: (BuildContext context, int index) {
-          Music music = musics[0];
+          Music music = musics[index];
 
           return GestureDetector(
             onTap: () {

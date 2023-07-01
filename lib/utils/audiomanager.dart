@@ -1,14 +1,15 @@
 import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:speezer_app/data/musics.dart';
 import 'package:speezer_app/models/music.dart';
 
 class AudioManager {
   AudioPlayer audioPlayer = AudioPlayer();
-  late Music selectedMusic;
+  late Music music = musics[0];
 
   Future<void> playMusic() async {
-    String source = selectedMusic.audioSource;
+    String source = music.audioSource;
     await audioPlayer.play(UrlSource("assets/audio/$source"));
   }
 
@@ -28,8 +29,8 @@ class AudioManager {
     await audioPlayer.seek(duration);
   }
 
-  void setSelectedMusic(Music music) {
-    selectedMusic = music;
+  void setSelectedMusic(Music _music) {
+    music = _music;
   }
 
   void disposeAudioPlayer() {

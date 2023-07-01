@@ -9,8 +9,12 @@ import '../../models/music.dart';
 class PlaybackBar extends StatefulWidget {
   final AudioManager audioManager;
   final PlayerState playerState;
-  const PlaybackBar(
-      {super.key, required this.audioManager, required this.playerState});
+
+  const PlaybackBar({
+    super.key,
+    required this.audioManager,
+    required this.playerState,
+  });
 
   @override
   _PlaybackBarState createState() => _PlaybackBarState();
@@ -56,6 +60,7 @@ class _PlaybackBarState extends State<PlaybackBar> {
   Widget build(BuildContext context) {
     PlayerState playerState = widget.playerState;
     PlaybackBarManager playbackmanager = PlaybackBarManager();
+    Music? music = widget.audioManager.music;
 
     int totalTimeInSeconds = totalDuration.inSeconds;
 
@@ -81,6 +86,10 @@ class _PlaybackBarState extends State<PlaybackBar> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text(
+                music.name,
+                style: const TextStyle(color: Colors.white, fontSize: 12),
+              ),
               IconButton(
                 splashRadius: 0.1,
                 icon: const Icon(
