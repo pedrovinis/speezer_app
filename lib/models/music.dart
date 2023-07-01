@@ -7,16 +7,16 @@ class Music {
   late final String audioSource;
   late final Genre genre;
   late final String name;
-  late final Artist artist;
+  late final List<Artist> artists;
 
   Music(
       {required String audioSource,
       required Genre genre,
       required String name,
-      required Artist artist}) {
+      required List<Artist> artists}) {
     this.audioSource = audioSource;
     this.name = name;
     this.genre = genre;
-    this.artist = artist;
+    this.artists = artists;
   }
 }

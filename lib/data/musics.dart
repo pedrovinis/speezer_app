@@ -7,5 +7,5 @@ List<Music> musics = [
       audioSource: "de_garrafa_a_pior.mp3",
       genre: Genre.Countryside,
       name: "Garrafa a pior",
-      artist: ArtistHenriqueEJuliano),
+      artists: [ArtistHenriqueEJuliano]),
 ];
