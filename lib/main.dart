@@ -4,6 +4,8 @@ import 'package:speezer_app/widgets/AudiosRow.dart';
 import 'package:speezer_app/widgets/PlaybackBar.dart';
 import 'package:speezer_app/widgets/SideBar.dart';
 import 'utils/audiomanager.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() => runApp(const SpeezerApp());
 
@@ -13,8 +15,17 @@ class SpeezerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Speezer App',
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', 'US'),
+        Locale('es', 'ES'),
+        Locale('pt', 'BR'),
+      ],
       theme: ThemeData(
         primaryColor: Colors.black,
         primarySwatch: Colors.deepPurple,
@@ -83,19 +94,20 @@ class _SpeezerHomeState extends State<SpeezerHome> {
           ),
         ),
       ),
-      body: const Row(
+      body: Row(
         children: [
-          SideBar(),
+          const SideBar(),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 8.0),
                   child: Text(
-                    'Playing now',
-                    style: TextStyle(
+                    "test",
+                    // AppLocalizations.of(context)!.playing_now,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
