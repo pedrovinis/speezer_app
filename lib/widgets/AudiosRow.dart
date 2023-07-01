@@ -20,7 +20,8 @@ class AudiosRow extends StatelessWidget {
 
           return GestureDetector(
             onTap: () {
-              audioManager.playAudio(music.audioSource);
+              audioManager.setSelectedMusic(music);
+              audioManager.playMusic();
             },
             child: Container(
               width: 150.0,

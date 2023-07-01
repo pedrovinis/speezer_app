@@ -35,18 +35,6 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
-  void playAudio(String source) {
-    audioManager.playAudio(source);
-  }
-
-  void pauseAudio() {
-    audioManager.pauseAudio();
-  }
-
-  void stopAudio() {
-    audioManager.stopAudio();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

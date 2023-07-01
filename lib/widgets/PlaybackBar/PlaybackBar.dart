@@ -4,6 +4,8 @@ import 'package:speezer_app/utils/audiomanager.dart';
 import 'package:speezer_app/utils/plabackbarmanager.dart';
 import 'package:speezer_app/widgets/PlaybackBar/PlayerTimer.dart';
 
+import '../../models/music.dart';
+
 class PlaybackBar extends StatefulWidget {
   final AudioManager audioManager;
   final PlayerState playerState;
@@ -42,16 +44,12 @@ class _PlaybackBarState extends State<PlaybackBar> {
     widget.audioManager.setCurrentPosition(position);
   }
 
-  void playAudio(String source) {
-    widget.audioManager.playAudio(source);
+  void pauseMusic() {
+    widget.audioManager.pauseMusic();
   }
 
-  void pauseAudio() {
-    widget.audioManager.pauseAudio();
-  }
-
-  void stopAudio() {
-    widget.audioManager.stopAudio();
+  void resumeMusic() {
+    widget.audioManager.resumeMusic();
   }
 
   @override
@@ -99,9 +97,9 @@ class _PlaybackBarState extends State<PlaybackBar> {
                 ),
                 onPressed: () {
                   if (isPlaying) {
-                    pauseAudio();
+                    pauseMusic();
                   } else {
-                    playAudio("assets/audio/de_garrafa_a_pior.mp3");
+                    resumeMusic();
                   }
                 },
               ),
