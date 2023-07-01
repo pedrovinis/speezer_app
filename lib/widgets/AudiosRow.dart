@@ -18,6 +18,8 @@ class AudiosRow extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           Music music = musics[index];
           String artistsImageSource = music.artists[0].imageSource;
+          bool isMusicSelected =
+              audioManager.music.audioSource == music.audioSource;
 
           return GestureDetector(
             onTap: () {
@@ -27,8 +29,11 @@ class AudiosRow extends StatelessWidget {
             child: Container(
                 width: 150.0,
                 margin: const EdgeInsets.all(8.0),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.deepPurple)),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        color: isMusicSelected
+                            ? Colors.deepPurple
+                            : Colors.grey)),
                 child: Column(
                   children: [
                     Image(
