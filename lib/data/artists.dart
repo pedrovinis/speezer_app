@@ -3,7 +3,7 @@
 import 'package:speezer_app/models/artist.dart';
 
 Artist ArtistHenriqueEJuliano =
-    Artist(imageMedia: "", name: "Henrique e Juliano");
+    Artist(imageSource: "henrique-e-juliano.jpeg", name: "Henrique e Juliano");
 
 List<Artist> artists = [
   ArtistHenriqueEJuliano,

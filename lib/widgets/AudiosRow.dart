@@ -17,6 +17,7 @@ class AudiosRow extends StatelessWidget {
         itemCount: musics.length,
         itemBuilder: (BuildContext context, int index) {
           Music music = musics[index];
+          String artistsImageSource = music.artists[0].imageSource;
 
           return GestureDetector(
             onTap: () {
@@ -24,19 +25,36 @@ class AudiosRow extends StatelessWidget {
               audioManager.playMusic();
             },
             child: Container(
-              width: 150.0,
-              margin: const EdgeInsets.all(8.0),
-              color: Colors.deepPurple,
-              child: Center(
-                child: Text(
-                  music.name,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.0,
-                  ),
-                ),
-              ),
-            ),
+                width: 150.0,
+                margin: const EdgeInsets.all(8.0),
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.deepPurple)),
+                child: Column(
+                  children: [
+                    Image(
+                        image: AssetImage("assets/image/$artistsImageSource")),
+                    Center(
+                      child: Column(children: [
+                        Text(
+                          music.name,
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Text(
+                          music.artists[0].name,
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ],
+                )),
           );
         },
       ),
