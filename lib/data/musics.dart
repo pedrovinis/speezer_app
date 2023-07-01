@@ -8,4 +8,9 @@ List<Music> musics = [
       genre: Genre.Countryside,
       name: "Garrafa a pior",
       artists: [ArtistHenriqueEJuliano]),
+  Music(
+      audioSource: "a-maior-saudade.mp3",
+      genre: Genre.Countryside,
+      name: "A maior saudade",
+      artists: [ArtistHenriqueEJuliano]),
 ];
