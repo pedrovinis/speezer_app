@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 16.0, vertical: 8.0),
                   child: Text(
-                    AppLocalizations.of(context)!.playing_now,
+                    AppLocalizations.of(context)!.explore,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18.0,
