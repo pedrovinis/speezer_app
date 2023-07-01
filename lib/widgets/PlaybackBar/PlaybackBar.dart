@@ -23,6 +23,7 @@ class PlaybackBar extends StatefulWidget {
 class _PlaybackBarState extends State<PlaybackBar> {
   Duration currentDuration = Duration.zero;
   Duration totalDuration = Duration.zero;
+  double volume = 1;
 
   @override
   void initState() {
@@ -41,6 +42,14 @@ class _PlaybackBarState extends State<PlaybackBar> {
       setState(() {
         currentDuration = duration;
       });
+    });
+  }
+
+  void setVolume(double value) {
+    widget.audioManager.audioPlayer.setVolume(value);
+
+    setState(() {
+      volume = value;
     });
   }
 
@@ -77,7 +86,7 @@ class _PlaybackBarState extends State<PlaybackBar> {
 
     String totalDurationISOStr = playbackmanager.getFormatedTime(totalDuration);
 
-    double leftRightContainerWidth = 100;
+    double leftRightContainerWidth = 150;
 
     return Container(
         height: 108,
@@ -146,9 +155,27 @@ class _PlaybackBarState extends State<PlaybackBar> {
                     ),
                   ],
                 ),
-                Container(
-                  width: leftRightContainerWidth,
-                  child: Text(""),
+                Row(
+                  children: [
+                    SizedBox(
+                        width: leftRightContainerWidth,
+                        child: SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              trackHeight: 0.5,
+                              thumbShape: const RoundSliderThumbShape(
+                                enabledThumbRadius: 3,
+                                elevation: 0,
+                              ),
+                            ),
+                            child: Slider(
+                              onChanged: (double value) {
+                                setVolume(value);
+                              },
+                              value: volume,
+                              activeColor: Colors.white,
+                              inactiveColor: Colors.grey,
+                            ))),
+                  ],
                 )
               ],
             ),
