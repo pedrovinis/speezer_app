@@ -1,0 +1,3 @@
+enum Genre {
+  Countryside, // Sertanejo
+}
