@@ -13,4 +13,29 @@ List<Music> musics = [
       genre: Genre.Countryside,
       name: "A maior saudade",
       artists: [ArtistHenriqueEJuliano]),
+  Music(
+      audioSource: "groupies.mp3",
+      genre: Genre.Trap,
+      name: "Groupies",
+      artists: [ArtistMatue]),
+  Music(
+      audioSource: "goosebumps.mp3",
+      genre: Genre.TrapInternational,
+      name: "Goosebumps",
+      artists: [ArtistTravisScott]),
+  Music(
+      audioSource: "beberia_ou_nao_beberia.mp3",
+      genre: Genre.Countryside,
+      name: "Você beberia ou não beberia",
+      artists: [ArtistZenetoeCristiano]),
+  Music(
+      audioSource: "roct-pot.mp3",
+      genre: Genre.Funk,
+      name: "Roct Poct",
+      artists: [ArtistMcLaranjinha]),
+  Music(
+      audioSource: "Batom_de_Cereja.mp3",
+      genre: Genre.Countryside,
+      name: "Batom de Cereja",
+      artists: [ArtistIsraeleRodolffo]),
 ];
