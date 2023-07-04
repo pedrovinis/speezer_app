@@ -6,7 +6,7 @@ class SideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 250.0,
+      width: 220.0,
       child: Drawer(
         backgroundColor: Theme.of(context).primaryColor,
         child: ListView(
