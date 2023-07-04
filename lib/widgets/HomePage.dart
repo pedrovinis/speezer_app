@@ -1,5 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:speezer_app/data/musics.dart';
+import 'package:speezer_app/utils/audiorowsmanager.dart';
 import 'package:speezer_app/widgets/AudiosRow.dart';
 import 'package:speezer_app/widgets/PlaybackBar/PlaybackBar.dart';
 import 'package:speezer_app/widgets/SideBar.dart';
@@ -16,7 +18,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Music currentMusic;
-  late AudioManager audioManager =  AudioManager();
+  late AudioManager audioManager = AudioManager();
   PlayerState playerState = PlayerState.paused;
 
   @override
@@ -40,6 +42,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    AudioRowManager audioRows = AudioRowManager();
+    List<List<Music>> exploreMuiscList =
+        audioRows.getExploreMusicRowsList(rowLenght: 10);
+
+    print(exploreMuiscList);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
@@ -72,7 +80,17 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                AudiosRow(audioManager: audioManager),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: exploreMuiscList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      List<Music> list = exploreMuiscList[index];
+
+                      return AudiosRow(
+                          audioManager: audioManager, musics: list);
+                    },
+                  ),
+                )
               ],
             ),
           ),

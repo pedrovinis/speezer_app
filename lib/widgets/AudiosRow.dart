@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:speezer_app/data/musics.dart';
 import 'package:speezer_app/utils/audiomanager.dart';
 
 import '../models/music.dart';
 
 class AudiosRow extends StatelessWidget {
   final AudioManager audioManager;
-  const AudiosRow({super.key, required this.audioManager});
+  final List<Music> musics;
+  const AudiosRow(
+      {super.key, required this.audioManager, required this.musics});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 200.0,
       child: ListView.builder(
+        shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemCount: musics.length,
         itemBuilder: (BuildContext context, int index) {
@@ -31,9 +33,8 @@ class AudiosRow extends StatelessWidget {
                 margin: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                     border: Border.all(
-                        color: isMusicSelected
-                            ? Colors.deepPurple
-                            : Colors.grey)),
+                        color:
+                            isMusicSelected ? Colors.deepPurple : Colors.grey)),
                 child: Column(
                   children: [
                     Image(

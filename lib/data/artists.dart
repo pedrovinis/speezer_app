@@ -4,8 +4,7 @@ import 'package:speezer_app/models/artist.dart';
 
 Artist ArtistHenriqueEJuliano =
     Artist(imageSource: "henrique-e-juliano.jpeg", name: "Henrique e Juliano");
-Artist ArtistMatue =
-    Artist(imageSource: "matue.jpg", name: "Matuê");
+Artist ArtistMatue = Artist(imageSource: "matue.jpg", name: "Matuê");
 Artist ArtistTravisScott =
     Artist(imageSource: "Travis_Scott.jpg", name: "Travis Scott");
 Artist ArtistZenetoeCristiano =
