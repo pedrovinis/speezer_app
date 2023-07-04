@@ -38,17 +38,11 @@ class SideBar extends StatelessWidget {
               iconColor: Colors.white,
               focusColor: Colors.grey,
               textColor: Colors.white,
-              leading: const Icon(Icons.search),
-              title: const Text('Search'),
-              onTap: () {},
-            ),
-            ListTile(
-              iconColor: Colors.white,
-              focusColor: Colors.grey,
-              textColor: Colors.white,
-              leading: const Icon(Icons.library_music),
-              title: const Text('Library'),
-              onTap: () {},
+              leading: const Icon(Icons.list),
+              title: const Text('Discover'),
+              onTap: () {
+                Navigator.pushNamed(context, '/discover');
+              },
             ),
           ],
         ),

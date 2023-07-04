@@ -21,7 +21,11 @@ class SpeezerApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
         fontFamily: 'Arial',
       ),
-      home: const HomePage(),
+      initialRoute: "/",
+      routes: {
+        '/': (context) => const HomePage(),
+        '/discover': (context) => const HomePage(),
+      },
     );
   }
 }
