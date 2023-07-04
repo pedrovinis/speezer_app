@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     AudioRowManager audioRows = AudioRowManager();
     List<List<Music>> exploreMuiscList =
-        audioRows.getExploreMusicRowsList(rowLenght: 10);
+        audioRows.getMusicsRowsList(musics: musics, rowLenght: 10);
 
     return Scaffold(
       appBar: AppBar(
