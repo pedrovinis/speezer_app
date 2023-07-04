@@ -13,6 +13,10 @@ Artist ArtistMcLaranjinha =
     Artist(imageSource: "gordao_do_pc.png", name: "MC Laranjinha");
 Artist ArtistIsraeleRodolffo =
     Artist(imageSource: "Israel_e_Rodolffo.jpg", name: "Israel e Rodolffo");
+Artist ArtistLucasBeat =
+    Artist(imageSource: "lucas_beat.jpg", name: "DJ Lucas beat");
+Artist ArtistMatheuseKaun =
+    Artist(imageSource: "matheus_e_kauan.jpg", name: "Matheus e Kauan");
 
 List<Artist> artists = [
   ArtistHenriqueEJuliano,
@@ -21,4 +25,5 @@ List<Artist> artists = [
   ArtistZenetoeCristiano,
   ArtistMcLaranjinha,
   ArtistIsraeleRodolffo,
+  ArtistLucasBeat,
 ];

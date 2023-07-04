@@ -38,4 +38,24 @@ List<Music> musics = [
       genre: Genre.Countryside,
       name: "Batom de Cereja",
       artists: [ArtistIsraeleRodolffo]),
+  Music(
+      audioSource: "beat_do_akon.mp3",
+      genre: Genre.Funk,
+      name: "Beat do Akon",
+      artists: [ArtistLucasBeat]),
+  Music(
+      audioSource: "ela_e_ela.mp3",
+      genre: Genre.Countryside,
+      name: "Ela e Ela",
+      artists: [ArtistZenetoeCristiano]),
+  Music(
+      audioSource: "Vou_ter_que_superar.mp3",
+      genre: Genre.Countryside,
+      name: "Vou ter que superar",
+      artists: [ArtistMatheuseKaun]),
+  Music(
+      audioSource: "Batendo_o_dente.mp3",
+      genre: Genre.Countryside,
+      name: "Batendo o dente",
+      artists: [ArtistZenetoeCristiano]),
 ];
