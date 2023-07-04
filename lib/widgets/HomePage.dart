@@ -46,8 +46,6 @@ class _HomePageState extends State<HomePage> {
     List<List<Music>> exploreMuiscList =
         audioRows.getExploreMusicRowsList(rowLenght: 10);
 
-    print(exploreMuiscList);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
