@@ -35,16 +35,6 @@ class SideBar extends StatelessWidget {
               title: Text(AppLocalizations.of(context)!.sidebar_home),
               onTap: () {},
             ),
-            ListTile(
-              iconColor: Colors.white,
-              focusColor: Colors.grey,
-              textColor: Colors.white,
-              leading: const Icon(Icons.list),
-              title: const Text('Discover'),
-              onTap: () {
-                Navigator.pushNamed(context, '/discover');
-              },
-            ),
           ],
         ),
       ),
