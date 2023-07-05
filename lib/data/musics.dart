@@ -1,5 +1,5 @@
 import 'package:speezer_app/data/artists.dart';
-import 'package:speezer_app/models/Genre.dart';
+import 'package:speezer_app/models/genre.dart';
 import 'package:speezer_app/models/music.dart';
 
 List<Music> musics = [

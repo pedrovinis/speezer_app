@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_initializing_formals
 
-import 'package:speezer_app/models/Genre.dart';
+import 'package:speezer_app/models/genre.dart';
 import 'package:speezer_app/models/artist.dart';
 
 class Music {
