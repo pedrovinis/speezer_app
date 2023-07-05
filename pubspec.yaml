@@ -39,6 +39,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   audioplayers: ^4.1.0
   l10n_flutter: ^1.0.7
+  audioplayers_linux: ^2.1.0
 
 dev_dependencies:
   flutter_test:

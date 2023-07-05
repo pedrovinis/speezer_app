@@ -50,7 +50,7 @@ packages:
     source: hosted
     version: "4.1.0"
   audioplayers_linux:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: audioplayers_linux
       sha256: "396b62ac62c92dd26c3bc5106583747f57a8b325ebd2b41e5576f840cfc61338"
