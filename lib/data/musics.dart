@@ -114,7 +114,7 @@ List<Music> musics = [
       name: "Bebezinhas da Faculdade",
       artists: [ArtistMcPaiva]),
   Music(
-      audioSource: "BUTTERFLY_ EFFECT.mp3",
+      audioSource: "BUTTERFLY_EFFECT.mp3",
       genre: Genre.TrapInternational,
       name: "Butterfly Efect",
       artists: [ArtistTravisScott]),
