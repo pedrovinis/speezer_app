@@ -153,7 +153,7 @@ class _PlaybackBarState extends State<PlaybackBar> {
                         if (isPlaying) {
                           pauseMusic();
                         } else if (currentDuration.inSeconds ==
-                            Duration(seconds: 0).inSeconds) {
+                            const Duration(seconds: 0).inSeconds) {
                           playMusic();
                         } else {
                           resumeMusic();
