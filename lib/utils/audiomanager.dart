@@ -33,6 +33,29 @@ class AudioManager {
     music = _music;
   }
 
+  void playNextMusic() {
+    int nextMusicIndex = musics
+            .indexWhere((element) => music.audioSource == element.audioSource) +
+        1;
+
+    bool nextDoesntExist = nextMusicIndex >= musics.length;
+    if (nextDoesntExist) nextMusicIndex = 0;
+
+    music = musics[nextMusicIndex];
+    playMusic();
+  }
+
+  void playPreviousMusic() {
+    int previousMusicIndex = musics
+            .indexWhere((element) => music.audioSource == element.audioSource) -
+        1;
+
+    if (previousMusicIndex <= -1) previousMusicIndex = musics.length - 1;
+
+    music = musics[previousMusicIndex];
+    playMusic();
+  }
+
   void disposeAudioPlayer() {
     audioPlayer.dispose();
   }

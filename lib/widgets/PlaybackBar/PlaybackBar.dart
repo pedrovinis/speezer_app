@@ -69,6 +69,14 @@ class _PlaybackBarState extends State<PlaybackBar> {
     widget.audioManager.resumeMusic();
   }
 
+  void playNextMusic() {
+    widget.audioManager.playNextMusic();
+  }
+
+  void playPreviousMusic() {
+    widget.audioManager.playPreviousMusic();
+  }
+
   @override
   Widget build(BuildContext context) {
     PlayerState playerState = widget.playerState;
@@ -133,7 +141,7 @@ class _PlaybackBarState extends State<PlaybackBar> {
                         Icons.skip_previous,
                         color: Colors.white,
                       ),
-                      onPressed: () {},
+                      onPressed: playPreviousMusic,
                     ),
                     IconButton(
                       splashRadius: 0.1,
@@ -158,7 +166,7 @@ class _PlaybackBarState extends State<PlaybackBar> {
                         Icons.skip_next,
                         color: Colors.white,
                       ),
-                      onPressed: () {},
+                      onPressed: playNextMusic,
                     ),
                   ],
                 ),
