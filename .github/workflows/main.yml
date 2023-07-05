@@ -63,3 +63,30 @@ jobs:
           artifacts: "build/linux/x64/release/bundle/speezer_app-linux.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v1.0.${{ github.run_number }}l
+ build-and-release-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          architecture: x64
+      - name: Install project dependencies
+        run: flutter pub get
+      # - name: Generate intermediates
+        # run: flutter pub run build_runner build --delete-conflicting-outputs
+      - name: Enable macos build
+        run: flutter config --enable-linux-desktop
+      - run: flutter build ios --release
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          filename: speezer_app-macos.zip
+          directory: build/macos/x64/release/bundle
+      - name: MacOS Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/macos/x64/release/bundle/speezer_app-macos.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v1.0.${{ github.run_number }}l
