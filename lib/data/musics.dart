@@ -58,4 +58,64 @@ List<Music> musics = [
       genre: Genre.Countryside,
       name: "Batendo o dente",
       artists: [ArtistZenetoeCristiano]),
+  Music(
+      audioSource: "Tiffany.mp3",
+      genre: Genre.Trap,
+      name: "Tiffany",
+      artists: [ArtistMdChefe]),
+  Music(
+      audioSource: "casamento.mp3",
+      genre: Genre.Funk,
+      name: "Casamento",
+      artists: [ArtistMcRyan]),
+  Music(
+      audioSource: "Nao_me_sinto_mal.mp3",
+      genre: Genre.Trap,
+      name: "Não me sinto mal mais",
+      artists: [ArtistSidoka]),
+  Music(
+      audioSource: "Boiadera.mp3",
+      genre: Genre.Countryside,
+      name: "Boiadeira",
+      artists: [ArtistAnaCastela]),
+  Music(
+      audioSource: "Bloqueado.mp3",
+      genre: Genre.Countryside,
+      name: "Bloqueado",
+      artists: [ArtistGustavoLima]),
+  Music(
+      audioSource: "Industry_baby.mp3",
+      genre: Genre.TrapInternational,
+      name: "Industry Baby",
+      artists: [ArtistLilNas]),
+  Music(
+      audioSource: "bonita_linda-e_sagaz.mp3",
+      genre: Genre.Funk,
+      name: "Bonita, Linda e Sagaz",
+      artists: [ArtistMcPedrinhoeDavi]),
+  Music(
+      audioSource: "Detalhes.mp3",
+      genre: Genre.Trap,
+      name: "Detalhes",
+      artists: [ArtistVeigh]),
+  Music(
+      audioSource: "60k.mp3",
+      genre: Genre.Trap,
+      name: "60k",
+      artists: [ArtistmajorRD]),
+  Music(
+      audioSource: "Blueberry.mp3",
+      genre: Genre.TrapInternational,
+      name: "Blueberry Faygo",
+      artists: [ArtistLilMosey]),
+  Music(
+      audioSource: "bebezinhas_da_facul.mp3",
+      genre: Genre.Funk,
+      name: "Bebezinhas da Faculdade",
+      artists: [ArtistMcPaiva]),
+  Music(
+      audioSource: "BUTTERFLY_ EFFECT.mp3",
+      genre: Genre.TrapInternational,
+      name: "Butterfly Efect",
+      artists: [ArtistTravisScott]),
 ];
