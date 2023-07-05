@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar({super.key});
@@ -31,7 +32,7 @@ class SideBar extends StatelessWidget {
               focusColor: Colors.grey,
               textColor: Colors.white,
               leading: const Icon(Icons.home),
-              title: const Text('Home'),
+              title: Text(AppLocalizations.of(context)!.sidebar_home),
               onTap: () {},
             ),
             ListTile(
