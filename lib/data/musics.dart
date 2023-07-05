@@ -138,4 +138,9 @@ List<Music> musics = [
       genre: Genre.Trap,
       name: "Cartão Black",
       artists: [ArtistKayblack]),
+  Music(
+      audioSource: "nosso_quadro.mp3",
+      genre: Genre.Countryside,
+      name: "Nosso Quadro",
+      artists: [ArtistAnaCastela]),
 ];
