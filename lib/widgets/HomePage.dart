@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late Music? currentMusic;
   late AudioManager audioManager = AudioManager();
-  PlayerState playerState = PlayerState.PAUSED;
+  PlayerState playerState = PlayerState.paused;
 
   @override
   void initState() {
