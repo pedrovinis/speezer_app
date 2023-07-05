@@ -39,6 +39,10 @@ Artist ArtistLilMosey =
     Artist(imageSource: "lil_mosey.jpeg", name: "Lil Mosey");
 Artist ArtistMcPaiva =
     Artist(imageSource: "paiva.jpg", name: "MC Paiva");
+Artist ArtistMcIg =
+    Artist(imageSource: "mc_ig.jpg", name: "MC Ig");
+Artist ArtistKayblack =
+    Artist(imageSource: "kayblack.jpg", name: "KayBlack");
 
 List<Artist> artists = [
   ArtistHenriqueEJuliano,
@@ -60,4 +64,6 @@ List<Artist> artists = [
   ArtistmajorRD,
   ArtistLilMosey,
   ArtistMcPaiva,
+  ArtistMcIg,
+  ArtistKayblack,
 ];

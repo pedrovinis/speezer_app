@@ -118,4 +118,24 @@ List<Music> musics = [
       genre: Genre.TrapInternational,
       name: "Butterfly Efect",
       artists: [ArtistTravisScott]),
+  Music(
+      audioSource: "3dias_virados.mp3",
+      genre: Genre.Funk,
+      name: "3 dias virados",
+      artists: [ArtistMcIg]),
+  Music(
+      audioSource: "conexoes_de_mafia.mp3",
+      genre: Genre.Trap,
+      name: "Conexões de Máfia",
+      artists: [ArtistMatue]),
+  Music(
+      audioSource: "gucci_gucci.mp3",
+      genre: Genre.Trap,
+      name: "Gucci Gucci",
+      artists: [ArtistMdChefe]),
+  Music(
+      audioSource: "cartão_black.mp3",
+      genre: Genre.Trap,
+      name: "Cartão Black",
+      artists: [ArtistKayblack]),
 ];
