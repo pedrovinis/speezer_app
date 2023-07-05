@@ -57,6 +57,10 @@ class _PlaybackBarState extends State<PlaybackBar> {
     widget.audioManager.setCurrentPosition(position);
   }
 
+  void playMusic() {
+    widget.audioManager.playMusic();
+  }
+
   void pauseMusic() {
     widget.audioManager.pauseMusic();
   }
@@ -140,6 +144,9 @@ class _PlaybackBarState extends State<PlaybackBar> {
                       onPressed: () {
                         if (isPlaying) {
                           pauseMusic();
+                        } else if (currentDuration.inSeconds ==
+                            Duration(seconds: 0).inSeconds) {
+                          playMusic();
                         } else {
                           resumeMusic();
                         }
