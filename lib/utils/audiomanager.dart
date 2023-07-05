@@ -10,7 +10,7 @@ class AudioManager {
 
   Future<void> playMusic() async {
     String source = music.audioSource;
-    await audioPlayer.play(UrlSource("assets/audio/$source"));
+    await audioPlayer.play("assets/audio/$source", isLocal: true);
   }
 
   Future<void> pauseMusic() async {

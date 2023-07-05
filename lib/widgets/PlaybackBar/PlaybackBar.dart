@@ -32,15 +32,10 @@ class _PlaybackBarState extends State<PlaybackBar> {
 
     super.initState();
 
-    audioPlayer.onDurationChanged.listen((Duration duration) {
-      setState(() {
-        totalDuration = duration;
-      });
-    });
-
-    audioPlayer.onPositionChanged.listen((Duration duration) {
+    audioPlayer.onAudioPositionChanged.listen((Duration duration) {
       setState(() {
         currentDuration = duration;
+        audioPlayer.getDuration().then((value) => totalDuration = Duration(milliseconds: value));
       });
     });
   }
@@ -91,7 +86,7 @@ class _PlaybackBarState extends State<PlaybackBar> {
     double horizontalPadding =
         MediaQuery.of(context).size.width.toDouble() * 0.25;
 
-    bool isPlaying = playerState == PlayerState.playing;
+    bool isPlaying = playerState == PlayerState.PLAYING;
 
     String currentDurationISOStr =
         playbackmanager.getFormatedTime(currentDuration);
